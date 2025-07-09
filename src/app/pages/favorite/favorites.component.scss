@@ -1,0 +1,22 @@
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.favorite-card {
+  background: #181818;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.favorite-card:hover {
+  transform: scale(1.05);
+}
+
+.empty-msg {
+  color: #ccc;
+  text-align: center;
+  margin: 3rem;
+}

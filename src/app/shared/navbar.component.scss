@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #000;
+  color: white;
+
+  .logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    a, button {
+      background: none;
+      border: none;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    a:hover, button:hover {
+      text-decoration: underline;
+    }
+  }
+}

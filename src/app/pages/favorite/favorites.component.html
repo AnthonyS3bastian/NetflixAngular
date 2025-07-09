@@ -1,0 +1,16 @@
+<ng-container *ngIf="favoriteMovies().length; else empty">
+  <div class="favorites-grid">
+    <mat-card
+      *ngFor="let m of favoriteMovies()"
+      class="favorite-card"
+      [routerLink]="['/movie', m.id]"
+    >
+      <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
+      <mat-card-title>{{ m.titulo }}</mat-card-title>
+    </mat-card>
+  </div>
+</ng-container>
+
+<ng-template #empty>
+  <p class="empty-msg">No tienes películas favoritas.</p>
+</ng-template>

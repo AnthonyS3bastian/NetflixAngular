@@ -1,0 +1,17 @@
+<section class="movies-grid">
+  <mat-card *ngFor="let movie of movies()" class="movie-card">
+    <img mat-card-image [src]="movie.imagen" [alt]="movie.titulo" />
+    
+    <mat-card-title>{{ movie.titulo }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ movie.descripcion }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button [routerLink]="['/movie', movie.id]">Ver detalles</a>
+      <a mat-button color="primary" [href]="movie.trailerUrl" target="_blank">
+        Ver tráiler
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</section>

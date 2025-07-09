@@ -1,0 +1,28 @@
+.movies-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  padding: 2rem;
+}
+
+.movie-card {
+  background: #181818;
+  color: white;
+
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+  }
+
+  a[mat-button] {
+    text-transform: none;
+    color: #e50914;
+    font-weight: 500;
+  }
+}

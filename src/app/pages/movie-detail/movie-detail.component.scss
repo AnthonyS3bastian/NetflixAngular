@@ -1,0 +1,19 @@
+.detail-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.detail-card {
+  max-width: 800px;
+  width: 100%;
+  background: #181818;
+  color: white;
+  border-radius: 8px;
+}
+
+.not-found {
+  text-align: center;
+  color: white;
+  margin-top: 3rem;
+}

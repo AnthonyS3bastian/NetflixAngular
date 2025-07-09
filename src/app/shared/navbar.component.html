@@ -1,0 +1,11 @@
+<nav class="navbar">
+  <span class="logo">Netflix</span>
+  <div class="nav-links">
+    <a routerLink="/home">Inicio</a>
+    <a routerLink="/login" *ngIf="!user()">Iniciar sesión</a>
+    <a routerLink="/register" *ngIf="!user()">Registrarse</a>
+    <a routerLink="/favoritos" *ngIf="user()">Favoritos</a>
+    <span *ngIf="user()">👤 {{ user()?.email }}</span>
+    <button *ngIf="user()" (click)="logout()">Cerrar sesión</button>
+  </div>
+</nav>

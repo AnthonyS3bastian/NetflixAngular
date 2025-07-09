@@ -1,0 +1,29 @@
+<div class="register-container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="email" type="email" />
+      <mat-error *ngIf="form.controls.email.hasError('required')">
+        El correo es obligatorio
+      </mat-error>
+      <mat-error *ngIf="form.controls.email.hasError('email')">
+        El correo no es válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="password" type="password" />
+      <mat-error *ngIf="form.controls.password.hasError('required')">
+        La contraseña es obligatoria
+      </mat-error>
+      <mat-error *ngIf="form.controls.password.hasError('minlength')">
+        Mínimo 6 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      Registrarse
+    </button>
+  </form>
+</div>

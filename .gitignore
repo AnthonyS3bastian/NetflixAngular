@@ -1,0 +1,31 @@
+# Node.js dependencies
+/node_modules
+
+# Build outputs
+/dist
+/out-tsc
+/coverage
+.angular
+
+# Environment files (contienen tus claves)
+src/environments/environment*.ts
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE/editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+.cache
