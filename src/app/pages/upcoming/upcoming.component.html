@@ -1,0 +1,17 @@
+<section class="upcoming-section">
+  <h2>Próximamente</h2>
+  <ng-container *ngIf="upcomingMovies() as list; else noUpcoming">
+    <div class="upcoming-grid">
+      <mat-card *ngFor="let m of list" class="upcoming-card" [routerLink]="['/movie', m.id]">
+        <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
+        <mat-card-title>{{ m.titulo }}</mat-card-title>
+        <mat-card-content>
+          <p>Estreno: {{ m.estreno }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-container>
+  <ng-template #noUpcoming>
+    <p class="no-upcoming">No hay estrenos próximamente.</p>
+  </ng-template>
+</section>

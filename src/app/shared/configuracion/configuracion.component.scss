@@ -1,0 +1,34 @@
+.config-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #181818;
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h1 {
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
+  }
+
+  .photo-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    input[type="file"] {
+      cursor: pointer;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    align-self: flex-start;
+  }
+}

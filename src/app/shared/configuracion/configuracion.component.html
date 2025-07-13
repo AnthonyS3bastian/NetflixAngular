@@ -1,0 +1,32 @@
+<div class="config-container">
+  <h1>Configuración de Cuenta</h1>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="photo-section">
+      <label for="foto">Foto de perfil</label>
+      <input id="foto" type="file" (change)="onFileChange($event)" />
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+        Nombre requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="email" type="email" />
+      <mat-error *ngIf="form.get('email')?.hasError('required')">
+        Correo requerido
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">
+        Formato inválido
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      Guardar cambios
+    </button>
+  </form>
+</div>

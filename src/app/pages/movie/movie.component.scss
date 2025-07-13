@@ -1,0 +1,27 @@
+.movie-grid {
+  display: grid;
+  gap: 1rem;
+  padding: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.movie-card {
+  background: #181818;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    height: 300px;
+    object-fit: cover;
+  }
+
+  mat-card-title {
+    margin: 0.5rem;
+    font-size: 1rem;
+  }
+}

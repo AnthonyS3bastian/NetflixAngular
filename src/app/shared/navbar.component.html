@@ -1,11 +1,30 @@
 <nav class="navbar">
-  <span class="logo">Netflix</span>
-  <div class="nav-links">
-    <a routerLink="/home">Inicio</a>
-    <a routerLink="/login" *ngIf="!user()">Iniciar sesión</a>
-    <a routerLink="/register" *ngIf="!user()">Registrarse</a>
-    <a routerLink="/favoritos" *ngIf="user()">Favoritos</a>
-    <span *ngIf="user()">👤 {{ user()?.email }}</span>
-    <button *ngIf="user()" (click)="logout()">Cerrar sesión</button>
+  <!-- IZQUIERDA: logo + menú -->
+  <div class="nav-left">
+    <a routerLink="/home" class="logo">
+      <img src="assets/images/logonetflix.png" alt="Netflix Logo" />
+    </a>
+
+    <ul class="nav-menu">
+      <li><a routerLink="/home">Inicio</a></li>
+      <li><a routerLink="/series">Series</a></li>
+      <li><a routerLink="/peliculas">Películas</a></li>
+      <li><a routerLink="/proximamente">Próximamente</a></li>
+      <li><a routerLink="/favoritos">Mi lista</a></li>
+    </ul>
+  </div>
+
+  <!-- DERECHA: iconos de acción -->
+  <div class="nav-right">
+    <button mat-icon-button aria-label="Buscar">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Notificaciones">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Perfil" (click)="goProfile()">
+      <!-- Puedes usar tu propia imagen de avatar -->
+      <img class="avatar" src="assets/images/avatar.png" alt="Perfil" />
+    </button>
   </div>
 </nav>

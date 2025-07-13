@@ -1,0 +1,36 @@
+<ng-container *ngIf="movies() as movies">
+  <section class="movies-grid">
+    <ng-container *ngFor="let m of movies">
+      <mat-card class="movie-card">
+        <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
+
+        <mat-card-title>{{ m.titulo }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ m.descripcion }}</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <!-- Este botón usa routerLink para navegar al detalle -->
+          <button
+            mat-button
+            color="primary"
+            [routerLink]="['/movie', m.id]"
+          >
+            Ver detalles
+          </button>
+
+          <!-- Este enlace abre el tráiler en otra pestaña -->
+          <a
+            mat-button
+            color="primary"
+            [href]="m.trailerUrl"
+            target="_blank"
+            rel="noopener"
+          >
+            Ver tráiler
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </section>
+</ng-container>
