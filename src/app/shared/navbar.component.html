@@ -1,6 +1,5 @@
-<!-- src/app/core/navbar/navbar.component.html -->
 <nav class="navbar">
-  <!-- IZQUIERDA -->
+  <!-- IZQUIERDA: logo + menú -->
   <div class="nav-left">
     <a routerLink="/home" class="logo">
       <img src="assets/images/logonetflix.png" alt="Netflix Logo" />
@@ -14,13 +13,16 @@
     </ul>
   </div>
 
-  <!-- DERECHA -->
+  <!-- DERECHA: iconos de acción + logout -->
   <div class="nav-right">
     <button mat-icon-button aria-label="Buscar">
       <mat-icon>search</mat-icon>
     </button>
     <button mat-icon-button aria-label="Notificaciones">
       <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Cerrar sesión" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
     </button>
     <button mat-icon-button aria-label="Perfil" (click)="goProfile()">
       <img

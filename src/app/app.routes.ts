@@ -1,62 +1,79 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AuthGuard }         from './core/auth.guard';
 
 export const routes: Routes = [
-  { path: '',               redirectTo: 'home',       pathMatch: 'full' },
-
-  { 
-    path: 'home',           
-    loadComponent: () => import('./pages/home/home.component')
-      .then(m => m.HomeComponent) 
+  // Rutas públicas
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/login/login.component')
+        .then(m => m.LoginComponent)
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./pages/register/register.component')
+        .then(m => m.RegisterComponent)
   },
 
-  { 
-    path: 'series',        
-    loadComponent: () => import('./pages/series/series.component')
-      .then(m => m.SeriesComponent) 
-  },
+  // Rutas protegidas y lazy
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  { 
-    path: 'peliculas',     
-    loadComponent: () => import('./pages/movie/movie.component')
-      .then(m => m.MovieComponent)    // ← MovieComponent, no MovieListComponent
-  },
+      // Home y otras rutas eager
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./pages/home/home.component')
+            .then(m => m.HomeComponent)
+      },
+      {
+        path: 'series',
+        loadComponent: () =>
+          import('./pages/series/series.component')
+            .then(m => m.SeriesComponent)
+      },
+      {
+        path: 'peliculas',
+        loadComponent: () =>
+          import('./pages/movie/movie.component')
+            .then(m => m.MovieComponent)
+      },
+      {
+        path: 'proximamente',
+        loadComponent: () =>
+          import('./pages/upcoming/upcoming.component')
+            .then(m => m.UpcomingComponent)
+      },
 
-  { 
-    path: 'proximamente',  
-    loadComponent: () => import('./pages/upcoming/upcoming.component')
-      .then(m => m.UpcomingComponent) 
-  },
+      // Lazy load módulos
+      {
+        path: 'favoritos',
+        loadChildren: () =>
+          import('./pages/favorite/favorites.module')
+            .then(m => m.FavoritesModule)
+      },
+      {
+        path: 'configuracion',
+        loadChildren: () =>
+          import('./shared/configuracion/configuracion.module')
+            .then(m => m.ConfiguracionModule)
+      },
 
-  { 
-    path: 'favoritos',     
-    loadComponent: () => import('./pages/favorite/favorites.component')
-      .then(m => m.FavoritesComponent) 
-  },
+      // Detalle de película
+      {
+        path: 'movie/:id',
+        loadComponent: () =>
+          import('./pages/movie-detail/movie-detail.component')
+            .then(m => m.MovieDetailComponent)
+      },
 
-  { 
-    path: 'movie/:id',     
-    loadComponent: () => import('./pages/movie-detail/movie-detail.component')
-      .then(m => m.MovieDetailComponent) 
-  },
-
-  { 
-    path: 'login',         
-    loadComponent: () => import('./pages/login/login.component')
-      .then(m => m.LoginComponent) 
-  },
-
-  { 
-    path: 'register',      
-    loadComponent: () => import('./pages/register/register.component')
-      .then(m => m.RegisterComponent) 
-  },
-
- { path: 'configuracion',
-  loadComponent: () => import('./shared/configuracion/configuracion.component')
-      .then(m => m.ConfiguracionComponent)
-},
-
-
-  { path: '**',            component: NotFoundComponent }
+      // Wildcard 404
+      { path: '**', component: NotFoundComponent }
+    ]
+  }
 ];
