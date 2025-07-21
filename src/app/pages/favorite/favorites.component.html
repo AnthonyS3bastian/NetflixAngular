@@ -1,16 +1,24 @@
-<ng-container *ngIf="favoriteMovies().length; else empty">
-  <div class="favorites-grid">
-    <mat-card
-      *ngFor="let m of favoriteMovies()"
-      class="favorite-card"
-      [routerLink]="['/movie', m.id]"
-    >
-      <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
-      <mat-card-title>{{ m.titulo }}</mat-card-title>
+<!-- src/app/pages/favorite/favorites.component.html -->
+<div class="favorites-container">
+  <h1>Mis Favoritos</h1>
+  <div class="cards">
+    <mat-card *ngFor="let movie of favorites()">
+      <img
+        mat-card-image
+        [src]="movie.imagen"
+        alt="{{ movie.titulo }}"
+      />
+      <mat-card-header>
+        <mat-card-title>{{ movie.titulo }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ movie.descripcion }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button (click)="toggleFav(movie.id)">
+          <mat-icon>{{ isFavorite(movie.id) ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
-</ng-container>
-
-<ng-template #empty>
-  <p class="empty-msg">No tienes películas favoritas.</p>
-</ng-template>
+</div>

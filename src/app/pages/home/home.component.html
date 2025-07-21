@@ -1,30 +1,51 @@
+<!-- src/app/pages/home/home.component.html -->
 <ng-container *ngIf="movies() as movies">
   <section class="movies-grid">
     <ng-container *ngFor="let m of movies">
       <mat-card class="movie-card">
-        <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
+        <!-- Imagen principal -->
+        <img 
+          mat-card-image 
+          [src]="m.imagen" 
+          [alt]="m.titulo" 
+        />
 
+        <!-- Título -->
         <mat-card-title>{{ m.titulo }}</mat-card-title>
+
+        <!-- Descripción breve -->
         <mat-card-content>
           <p>{{ m.descripcion }}</p>
         </mat-card-content>
 
+        <!-- Acciones: favorito + ver detalle + ver tráiler -->
         <mat-card-actions>
-          <!-- Este botón usa routerLink para navegar al detalle -->
-          <button
-            mat-button
-            color="primary"
+          <!-- Toggle favorito -->
+          <button 
+            mat-icon-button 
+            aria-label="Toggle favorite" 
+            (click)="toggleFavorite(m.id)"
+          >
+            <mat-icon>
+              {{ isFavorite(m.id) ? 'favorite' : 'favorite_border' }}
+            </mat-icon>
+          </button>
+
+          <!-- Ir al detalle -->
+          <button 
+            mat-button 
+            color="primary" 
             [routerLink]="['/movie', m.id]"
           >
             Ver detalles
           </button>
 
-          <!-- Este enlace abre el tráiler en otra pestaña -->
-          <a
-            mat-button
-            color="primary"
-            [href]="m.trailerUrl"
-            target="_blank"
+          <!-- Abrir tráiler -->
+          <a 
+            mat-button 
+            color="primary" 
+            [href]="m.trailerUrl" 
+            target="_blank" 
             rel="noopener"
           >
             Ver tráiler
