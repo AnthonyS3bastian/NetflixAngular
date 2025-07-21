@@ -1,9 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// src/app/core/navbar/navbar.component.ts
+
+import { Component, computed } from '@angular/core';
+import { CommonModule }        from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule }   from '@angular/material/icon';
-import { AuthService }     from '../core/auth.service';
+import { MatButtonModule }      from '@angular/material/button';
+import { MatIconModule }        from '@angular/material/icon';
+
+import { ProfileService } from '../core/profile.service';
+import { AuthService }    from '../core/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,15 +22,25 @@ import { AuthService }     from '../core/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  private auth   = inject(AuthService);
-  private router = inject(Router);
-  user = this.auth.user;
+  // Computed signal para decidir avatar
+  profilePhotoUrl = computed(() => {
+    const perfil = this.profileService.profile(); // Signal<UserProfile|null>
+    return perfil?.photoURL ?? 'assets/images/default.png';
+  });
+
+  constructor(
+    private profileService: ProfileService,
+    private authService: AuthService,  // <-- inyectamos AuthService
+    private router: Router
+  ) {}
 
   logout() {
-    this.auth.logout().then(() => this.router.navigate(['/login']));
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']);
+    });
   }
 
   goProfile() {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/configuracion']);
   }
 }

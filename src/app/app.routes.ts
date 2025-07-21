@@ -52,11 +52,11 @@ export const routes: Routes = [
       .then(m => m.RegisterComponent) 
   },
 
-  { 
-    path: 'configuracion', 
-    loadComponent: () => import('./shared/configuracion/configuracion.component')
-      .then(m => m.ConfiguracionComponent)  // ← ConfiguracionComponent
-  },
+ { path: 'configuracion',
+  loadComponent: () => import('./shared/configuracion/configuracion.component')
+      .then(m => m.ConfiguracionComponent)
+},
+
 
   { path: '**',            component: NotFoundComponent }
 ];

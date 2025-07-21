@@ -1,32 +1,26 @@
+<!-- src/app/shared/configuracion/configuracion.component.html -->
 <div class="config-container">
-  <h1>Configuración de Cuenta</h1>
-  <form [formGroup]="form" (ngSubmit)="submit()">
+  <!-- ... sección nombre y correo ... -->
+
+  <hr />
+
+  <section class="section">
+    <h2>Foto de Perfil</h2>
     <div class="photo-section">
-      <label for="foto">Foto de perfil</label>
-      <input id="foto" type="file" (change)="onFileChange($event)" />
+      <input type="file" accept="image/*" (change)="onFileChange($event)" />
+      <img
+        [src]="previewUrl || 'assets/images/default.png'"
+        class="preview"
+        alt="Vista previa"
+      />
     </div>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre" />
-      <mat-error *ngIf="form.get('nombre')?.hasError('required')">
-        Nombre requerido
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Correo electrónico</mat-label>
-      <input matInput formControlName="email" type="email" />
-      <mat-error *ngIf="form.get('email')?.hasError('required')">
-        Correo requerido
-      </mat-error>
-      <mat-error *ngIf="form.get('email')?.hasError('email')">
-        Formato inválido
-      </mat-error>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit">
-      Guardar cambios
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="savePhoto()"
+      type="button"
+    >
+      Guardar foto
     </button>
-  </form>
+  </section>
 </div>

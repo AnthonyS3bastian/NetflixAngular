@@ -1,10 +1,10 @@
+<!-- src/app/core/navbar/navbar.component.html -->
 <nav class="navbar">
-  <!-- IZQUIERDA: logo + menú -->
+  <!-- IZQUIERDA -->
   <div class="nav-left">
     <a routerLink="/home" class="logo">
       <img src="assets/images/logonetflix.png" alt="Netflix Logo" />
     </a>
-
     <ul class="nav-menu">
       <li><a routerLink="/home">Inicio</a></li>
       <li><a routerLink="/series">Series</a></li>
@@ -14,7 +14,7 @@
     </ul>
   </div>
 
-  <!-- DERECHA: iconos de acción -->
+  <!-- DERECHA -->
   <div class="nav-right">
     <button mat-icon-button aria-label="Buscar">
       <mat-icon>search</mat-icon>
@@ -23,8 +23,11 @@
       <mat-icon>notifications</mat-icon>
     </button>
     <button mat-icon-button aria-label="Perfil" (click)="goProfile()">
-      <!-- Puedes usar tu propia imagen de avatar -->
-      <img class="avatar" src="assets/images/avatar.png" alt="Perfil" />
+      <img
+        class="avatar"
+        [src]="profilePhotoUrl()"
+        alt="Perfil"
+      />
     </button>
   </div>
 </nav>
