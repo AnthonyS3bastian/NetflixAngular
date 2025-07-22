@@ -1,0 +1,23 @@
+/* src/app/pages/search/search.component.scss */
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 1rem;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+.title {
+  font-weight: 500;
+}

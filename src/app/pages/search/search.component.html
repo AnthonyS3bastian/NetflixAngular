@@ -1,0 +1,30 @@
+<!-- src/app/pages/search/search.component.html -->
+<div class="search-container p-4">
+  <input
+    type="text"
+    class="w-full p-2 border rounded"
+    placeholder="Buscar película o serie..."
+    (input)="searchTerm.set($any($event.target).value)"
+  />
+</div>
+
+<div *ngIf="results().length > 0; else noResults">
+  <div
+    *ngFor="let r of results()"
+    class="result-item"
+    [routerLink]="['/', r.type === 'movie' ? 'movie' : 'series', r.id]"
+  >
+    <img
+      [src]="r.image"
+      [alt]="r.title"
+      class="w-12 h-8 object-cover rounded"
+    />
+    <span class="title">{{ r.title }}</span>
+  </div>
+</div>
+
+<ng-template #noResults>
+  <p class="p-4 text-center text-gray-500">
+    No se encontraron resultados.
+  </p>
+</ng-template>

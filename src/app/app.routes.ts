@@ -99,6 +99,14 @@ export const routes: Routes = [
           import('./pages/movie-detail/movie-detail.component')
             .then(m => m.MovieDetailComponent)
       },
+      
+      {
+  path: 'search',
+  loadComponent: () =>
+    import('./pages/search/search.component')
+      .then(m => m.SearchComponent),
+  canActivate: [AuthGuard] // o quitar si quieres pública
+},
 
       // Wildcard 404
       { path: '**', component: NotFoundComponent }
