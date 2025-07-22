@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { NavbarComponent } from './shared/navbar.component';
-import { RouterOutlet } from '@angular/router';
+// src/app/app.component.ts
+import { Component, OnInit, inject } from '@angular/core';
+import { NavbarComponent }            from './shared/navbar.component';
+import { RouterOutlet }               from '@angular/router';
+import { MoviesService }              from './core/movies.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +13,13 @@ import { RouterOutlet } from '@angular/router';
     <router-outlet></router-outlet>
   `,
 })
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  private moviesService = inject(MoviesService);
+
+  async ngOnInit() {
+    // Siembra las películas UNA SOLA VEZ en Firestore:
+    // await this.moviesService.seedMovies();
+    // Luego de confirmar en la consola de Firebase que están creadas,
+    // comenta o elimina esta línea para que no vuelva a ejecutarse.
+  }
+}

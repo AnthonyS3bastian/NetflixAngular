@@ -1,6 +1,7 @@
-<section class="movie-grid">
-  <ng-container *ngIf="movies() as list">
-    <mat-card *ngFor="let m of list" class="movie-card" [routerLink]="['/movie', m.id]">
+<!-- src/app/pages/movie/movie.component.html -->
+<section *ngIf="movies().length > 0; else loading" class="movie-grid">
+  <ng-container *ngFor="let m of movies()">
+    <mat-card class="movie-card" [routerLink]="['/movie', m.id]">
       <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
       <mat-card-title>{{ m.titulo }}</mat-card-title>
       <mat-card-actions>
@@ -9,3 +10,9 @@
     </mat-card>
   </ng-container>
 </section>
+
+<ng-template #loading>
+  <div class="spinner-container">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-template>
