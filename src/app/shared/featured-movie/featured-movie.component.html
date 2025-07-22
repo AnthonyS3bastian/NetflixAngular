@@ -1,0 +1,21 @@
+<!-- src/app/shared/featured-movie/featured-movie.component.html -->
+<div class="hero">
+  <!-- Imagen centrada, reduce su tamaño con CSS -->
+  <img class="poster" [src]="item.image" [alt]="item.title" />
+
+  <!-- Overlay de gradiente oscuro a los lados -->
+  <div class="gradient"></div>
+
+  <!-- Texto y botones sobre todo -->
+  <div class="overlay">
+    <h1>{{ item.title }}</h1>
+    <div class="actions">
+      <button mat-raised-button color="primary" (click)="play()">
+        ▶ Reproducir
+      </button>
+      <button mat-stroked-button color="accent" (click)="moreInfo()">
+        ℹ Más información
+      </button>
+    </div>
+  </div>
+</div>

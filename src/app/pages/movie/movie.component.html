@@ -1,18 +1,7 @@
 <!-- src/app/pages/movie/movie.component.html -->
-<section *ngIf="movies().length > 0; else loading" class="movie-grid">
-  <ng-container *ngFor="let m of movies()">
-    <mat-card class="movie-card" [routerLink]="['/movie', m.id]">
-      <img mat-card-image [src]="m.imagen" [alt]="m.titulo" />
-      <mat-card-title>{{ m.titulo }}</mat-card-title>
-      <mat-card-actions>
-        <button mat-button color="primary">Ver detalles</button>
-      </mat-card-actions>
-    </mat-card>
-  </ng-container>
-</section>
+<app-featured-movie [item]="featured()"></app-featured-movie>
 
-<ng-template #loading>
-  <div class="spinner-container">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div>
-</ng-template>
+<section class="section">
+  <h2>Películas Populares</h2>
+  <app-carousel [items]="carouselItems()"></app-carousel>
+</section>

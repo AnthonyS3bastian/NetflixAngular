@@ -1,38 +1,52 @@
-// src/app/pages/home/home.component.ts
+import { Component, inject, computed } from '@angular/core';
+import { CommonModule }                from '@angular/common';
+import { RouterModule }                from '@angular/router';
 
-import { Component, inject }      from '@angular/core';
-import { CommonModule }           from '@angular/common';
-import { RouterModule }           from '@angular/router';
-import { MatCardModule }          from '@angular/material/card';
-import { MatButtonModule }        from '@angular/material/button';
-import { MatIconModule }          from '@angular/material/icon';
+import { FeaturedMovieComponent, FeaturedItem } from '../../shared/featured-movie/featured-movie.component';
+import { CarouselComponent, CarouselItem }     from '../../shared/carousel/carousel.component';
 
-import { MoviesService, Movie }   from '../../core/movies.service';
-import { FavoritesService }       from '../../core/favorites.service';
+import { MoviesService, Movie }        from '../../core/movies.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule,    // para routerLink
-    MatCardModule,   // para las tarjetas
-    MatButtonModule, // para botones
-    MatIconModule    // para <mat-icon>
+    RouterModule,
+    FeaturedMovieComponent,
+    CarouselComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   private movieService = inject(MoviesService);
-  private favService   = inject(FavoritesService);
 
-  /** Señal con la lista de películas */
-  movies = this.movieService.list;  // Signal<Movie[]>
+  /** Señal con todas las películas */
+  movies = this.movieService.list;
 
-  /** Devuelve true si el id está en favoritos */
-  isFavorite    = (id: string) => this.favService.isFavorite(id);
+  /** Destacado aleatorio */
+  featured = computed<FeaturedItem>(() => {
+    const arr = this.movies();
+    const m = arr[Math.floor(Math.random() * arr.length)];
+    return {
+      type: 'movie',
+      id: m.id,
+      title: m.titulo,
+      description: m.descripcion,
+      image: m.imagen,
+      trailerUrl: m.trailerUrl,
+      ageCategory: '13+' // Ajusta o extrae de tu modelo si lo tienes
+    };
+  });
 
-  /** Alterna el estado favorito */
-  toggleFavorite = (id: string) => this.favService.toggle(id);
+  /** Items para carousel */
+  carouselItems = computed<CarouselItem[]>(() =>
+    this.movies().map(m => ({
+      type: 'movie',
+      id: m.id,
+      title: m.titulo,
+      image: m.imagen
+    }))
+  );
 }

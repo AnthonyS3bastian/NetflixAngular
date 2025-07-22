@@ -1,12 +1,6 @@
-<!-- src/app/pages/series/series-list/series-list.component.html -->
-<div class="series-grid">
-  <!-- Llamamos a la señal en el template -->
-  <ng-container *ngFor="let s of seriesSignal()">
-    <div class="series-card">
-      <img [src]="s.posterUrl" [alt]="s.title" />
-      <h3>{{ s.title }}</h3>
-      <button (click)="goToDetail(s.id!)">Ver detalle</button>
-      <button (click)="delete(s.id!)">Borrar</button>
-    </div>
-  </ng-container>
-</div>
+<app-featured-movie [item]="featured()"></app-featured-movie>
+
+<section class="section">
+  <h2>Series Populares</h2>
+  <app-carousel [items]="carouselItems()"></app-carousel>
+</section>

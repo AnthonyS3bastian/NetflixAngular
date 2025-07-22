@@ -1,0 +1,20 @@
+<!-- src/app/shared/components/carousel/carousel.component.html -->
+<div class="carousel-container">
+  <button class="nav prev" (click)="scroll(-1)">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+
+  <div #scrollContainer class="carousel-items">
+    <div 
+      *ngFor="let item of items" 
+      class="carousel-item" 
+      [routerLink]="['/', item.type, item.id]"
+    >
+      <img [src]="item.image" [alt]="item.title" />
+    </div>
+  </div>
+
+  <button class="nav next" (click)="scroll(1)">
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+</div>

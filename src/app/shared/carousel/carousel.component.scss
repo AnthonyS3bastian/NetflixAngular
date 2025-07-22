@@ -1,0 +1,51 @@
+/* src/app/shared/components/carousel/carousel.component.scss */
+.carousel-container {
+  position: relative;
+  margin: 2rem 0;
+
+  .carousel-items {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+  }
+  .carousel-items::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 160px;
+    margin-right: 1rem;
+    cursor: pointer;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      display: block;
+    }
+  }
+
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+    z-index: 1;
+
+    &.prev { left: 0; }
+    &.next { right: 0; }
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* recorta y centra la imagen */
+  object-position: center;
+  border-radius: 4px;  /* opcional */
+}
