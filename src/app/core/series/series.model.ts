@@ -16,4 +16,5 @@ export interface Series {
   posterUrl: string;
   releaseDate: Date;
   ageCategory: string;
+  trailerUrl?: string;  // URL del tráiler (opcional)
 }

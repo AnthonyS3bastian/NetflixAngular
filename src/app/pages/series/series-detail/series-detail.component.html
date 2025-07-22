@@ -1,1 +1,43 @@
-<p>series-detail works!</p>
+<!-- src/app/pages/series/series-detail/series-detail.component.html -->
+<main class="detail-container" *ngIf="series() as s; else notFound">
+  <mat-card class="detail-card">
+    <img
+      mat-card-image
+      class="poster-img"
+      [src]="s.posterUrl"
+      [alt]="s.title"
+    />
+
+    <mat-card-header>
+      <mat-card-title>{{ s.title }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ s.genre }} — {{ s.releaseDate | date:'yyyy' }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p><strong>Edad:</strong> {{ s.ageCategory }}</p>
+      <p><strong>Temporadas:</strong> {{ s.seasons.length }}</p>
+      <p><strong>Cast:</strong> {{ castList() }}</p>
+      <p>{{ s.description }}</p>
+    </mat-card-content>
+
+    <mat-card-actions class="actions">
+      <button mat-stroked-button color="primary" (click)="playTrailer()">
+        ▶ Ver tráiler
+      </button>
+      <button mat-flat-button color="primary" (click)="toggleFavorite()">
+        {{ isFavorite() ? '❌ Quitar favorito' : '❤️ Agregar favorito' }}
+      </button>
+      <button
+        mat-stroked-button
+        color="accent"
+        (click)="edit()"
+        *ngIf="profile()?.role === 'admin'"
+      >
+        ✏️ Editar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</main>
+<ng-template #notFound><p class="not-found">Serie no encontrada.</p></ng-template>

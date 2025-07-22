@@ -1,6 +1,4 @@
-// src/app/core/series/series.service.ts
-
-import { Injectable, inject, signal, computed, WritableSignal, Signal } from '@angular/core';
+import { Injectable, inject, EnvironmentInjector, runInInjectionContext, signal, computed, WritableSignal, Signal } from '@angular/core';
 import {
   Firestore,
   collection,
@@ -10,18 +8,21 @@ import {
   updateDoc,
   deleteDoc
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
-import type { Series, Season } from './series.model';
+import { Observable }               from 'rxjs';
+import { toSignal }                from '@angular/core/rxjs-interop';
+import type { Series, Season }     from './series.model';
 
 @Injectable({ providedIn: 'root' })
 export class SeriesService {
-  private afs  = inject(Firestore);
-  private coll = collection(this.afs, 'series');
+  private afs      = inject(Firestore);
+  private injector = inject(EnvironmentInjector);
+  private coll     = collection(this.afs, 'series');
 
-  /** 1) Observable real-time de Firestore */
+  /** 1) Observable real-time de Firestore (ahora dentro del contexto DI) */
   public allSeries$: Observable<Series[]> =
-    collectionData(this.coll, { idField: 'id' }) as Observable<Series[]>;
+    runInInjectionContext(this.injector, () =>
+      collectionData(this.coll, { idField: 'id' }) as Observable<Series[]>
+    );
 
   /** 2) Señal con lista inicial vacía */
   public allSeries: Signal<Series[]> =
