@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AuthGuard }         from './core/auth.guard';
+import { AuthGuard }        from './core/auth.guard';
+import { AdminGuard }       from './core/guards/admin.guard';
 
 export const routes: Routes = [
   // Rutas públicas
@@ -17,26 +18,53 @@ export const routes: Routes = [
         .then(m => m.RegisterComponent)
   },
 
-  // Rutas protegidas y lazy
+  // Rutas protegidas
   {
     path: '',
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-      // Home y otras rutas eager
       {
         path: 'home',
         loadComponent: () =>
           import('./pages/home/home.component')
             .then(m => m.HomeComponent)
       },
+
+      // Series con CRUD y permisos
       {
-        path: 'series',
+    path: 'series',
+    children: [
+      {
+        path: '',
         loadComponent: () =>
-          import('./pages/series/series.component')
-            .then(m => m.SeriesComponent)
+          import('./pages/series/series-list/series-list.component')
+            .then(m => m.SeriesListComponent)
       },
+      {
+        path: 'new',
+        loadComponent: () =>
+          import('./pages/series/series-form/series-form.component')
+            .then(m => m.SeriesFormComponent),
+        canActivate: [AdminGuard]   // solo admin
+      },
+      {
+        path: 'edit/:id',
+        loadComponent: () =>
+          import('./pages/series/series-form/series-form.component')
+            .then(m => m.SeriesFormComponent),
+        canActivate: [AdminGuard]
+      },
+      {
+        path: ':id',
+        loadComponent: () =>
+          import('./pages/series/series-detail/series-detail.component')
+            .then(m => m.SeriesDetailComponent)
+      }
+    ]
+  },
+
       {
         path: 'peliculas',
         loadComponent: () =>
@@ -50,7 +78,7 @@ export const routes: Routes = [
             .then(m => m.UpcomingComponent)
       },
 
-      // Lazy load módulos
+      // Módulos lazy
       {
         path: 'favoritos',
         loadChildren: () =>

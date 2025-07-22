@@ -1,6 +1,7 @@
+<!-- src/app/pages/login/login.component.html -->
 <div class="login-container">
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Correo electrónico</mat-label>
       <input matInput formControlName="email" type="email" />
       <mat-error *ngIf="form.get('email')?.hasError('required')">
@@ -11,7 +12,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Contraseña</mat-label>
       <input matInput formControlName="password" type="password" />
       <mat-error *ngIf="form.get('password')?.hasError('required')">
@@ -22,8 +23,13 @@
       </mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit">
+    <button mat-raised-button color="primary" class="full-width" type="submit">
       Iniciar sesión
     </button>
   </form>
+
+  <p class="register-link">
+    ¿Eres nuevo? 
+    <a [routerLink]="['/register']">Regístrate aquí</a>
+  </p>
 </div>

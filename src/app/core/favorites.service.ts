@@ -15,12 +15,14 @@ import { MoviesService, Movie } from './movies.service';
 import { toSignal }            from '@angular/core/rxjs-interop';
 import { of }                  from 'rxjs';
 import { switchMap, map }      from 'rxjs/operators';
+import { ProfileService }      from './profile.service';
 
 @Injectable({ providedIn: 'root' })
 export class FavoritesService {
   private auth      = inject(AuthService);
   private firestore = inject(Firestore);
   private movies    = inject(MoviesService);
+  private profile   = inject(ProfileService);
 
   /** Señal de array de IDs de favoritos en Firestore */
   favoriteIds: Signal<string[]> = toSignal(
@@ -46,13 +48,23 @@ export class FavoritesService {
     const ids = this.favoriteIds();
     return this.movies
       .list()
-      .filter(m => ids.includes(m.id));
+      .filter(m => ids.includes(m.id!));
   });
 
   /** Añade un favorito (doc.id = movieId) */
-  async addFavorite(movieId: string) {
+  async addFavorite(movieId: string): Promise<void> {
     const user = this.auth.user();
     if (!user?.uid) return;
+
+    // 1) Comprueba el rol y el número de favoritos actuales
+    const role = this.profile.profile()?.role;
+    const currentCount = this.favoriteIds().length;
+    if (role === 'basic' && currentCount >= 5) {
+      // Lanza un error que podrás capturar en el componente
+      throw new Error('Como usuario básico solo puedes tener 5 favoritos');
+    }
+
+    // 2) Si pasa el check, lo añade
     const favDoc = doc(
       this.firestore,
       'users',
@@ -64,7 +76,7 @@ export class FavoritesService {
   }
 
   /** Elimina un favorito */
-  async removeFavorite(movieId: string) {
+  async removeFavorite(movieId: string): Promise<void> {
     const user = this.auth.user();
     if (!user?.uid) return;
     const favDoc = doc(
@@ -78,11 +90,11 @@ export class FavoritesService {
   }
 
   /** Alterna un favorito */
-  toggle(movieId: string) {
+  async toggle(movieId: string): Promise<void> {
     if (this.favoriteIds().includes(movieId)) {
-      this.removeFavorite(movieId);
+      await this.removeFavorite(movieId);
     } else {
-      this.addFavorite(movieId);
+      await this.addFavorite(movieId);
     }
   }
 

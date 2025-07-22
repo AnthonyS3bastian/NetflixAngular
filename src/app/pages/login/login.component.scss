@@ -1,10 +1,22 @@
+/* src/app/pages/login/login.component.scss */
 .login-container {
   max-width: 400px;
   margin: 2rem auto;
-  padding: 2rem;
-  background-color: #f5f5f5;
-  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  a {
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: 600;
+  }
 }
