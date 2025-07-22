@@ -1,13 +1,22 @@
-/* styles.scss */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+/* fondo oscuro en toda la app */
+html, body {
+  background-color: #111;
+  color: #fff;
+  height: 100%;
+  margin: 0;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: #fff; /* igual que tu tema dark */
+/* contenedor principal para que llene el 100% */
+app-root {
+  display: block;
+  min-height: 100%;
+  background-color: inherit;
+}
+
+/* opcional: tarjetas y grids con fondo oscuro */
+.movie-grid,
+.series-grid,
+.results-grid,
+.section {
+  background-color: #111;
 }

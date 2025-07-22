@@ -1,19 +1,57 @@
+/* Centrar el card en la pantalla */
 .detail-container {
   display: flex;
   justify-content: center;
+  align-items: center;  /* centra verticalmente también */
   padding: 2rem;
 }
 
+/* Hacemos el card bien ancho y centrado */
 .detail-card {
-  max-width: 800px;
-  width: 100%;
+  max-width: 1300px;
+  width: 90%;       /* ocupa el 90% del ancho disponible */
+  margin: 0 auto;   /* centro horizontal */
+  max-height: 1000vh;
+  overflow-y: auto;
   background: #181818;
-  color: white;
+  color: #fff;
   border-radius: 8px;
+  font-family: 'Netflix Sans', Arial, sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-.not-found {
-  text-align: center;
-  color: white;
-  margin-top: 3rem;
+/* Aumentamos el póster */
+.poster-img {
+  display: block;
+  margin: 1rem auto;
+  height: 350px;    /* más grande que antes */
+  width: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* Forzar botones blancos (todos los tipos) */
+mat-card-actions button.mat-stroked-button,
+mat-card-actions button.mat-flat-button,
+mat-card-actions button.mat-button,
+mat-card-actions a.mat-button {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+}
+
+/* Un poco de espacio entre botones y contenido */
+mat-card-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+/* Ajustes tipográficos */
+mat-card-title {
+  font-size: 1.8rem;
+}
+mat-card-subtitle {
+  font-size: 1rem;
+  color: #bbb;
 }
